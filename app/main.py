@@ -1,0 +1,30 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from app import models
+from app.database import engine
+from app.routers import users, auth
+
+app = FastAPI(title="API de Cadastro de Usuários")
+
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# cria tabelas
+models.Base.metadata.create_all(bind=engine)
+
+# routers
+app.include_router(users.router)
+app.include_router(auth.router)
+
+@app.get("/")
+def home():
+    return {"message": "API funcionando"}
+
+

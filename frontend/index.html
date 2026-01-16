@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cadastro de Usuários</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="page">
+    <header class="header">
+      <div>
+        <h1>Cadastro de Usuários</h1>
+        <p class="subtitle">Painel interno • FastAPI + SQLAlchemy</p>
+      </div>
+      <span class="badge" id="apiStatus">API: verificando...</span>
+    </header>
+
+    <main class="grid">
+
+      <!-- ✅ Card de LOGIN -->
+      <section class="card">
+        <h2>Login</h2>
+        <p class="muted">Entre para acessar funcionalidades protegidas (JWT).</p>
+
+        <form id="login-form" class="form">
+          <div class="field">
+            <label for="login-email">Email</label>
+            <input
+              id="login-email"
+              name="login-email"
+              type="email"
+              placeholder="ex: felipe@email.com"
+              required
+              autocomplete="username"
+            />
+          </div>
+
+          <div class="field">
+            <label for="login-password">Senha</label>
+            <input
+              id="login-password"
+              name="login-password"
+              type="password"
+              placeholder="Sua senha"
+              required
+              minlength="6"
+              autocomplete="current-password"
+            />
+          </div>
+
+          <button class="btn secondary" type="submit">Entrar</button>
+          <small id="login-status" class="muted" style="display:block; margin-top:10px;"></small>
+        </form>
+      </section>
+
+      <!-- Card do formulário -->
+      <section class="card">
+        <h2>Novo usuário</h2>
+        <p class="muted">Preencha os dados e clique em cadastrar.</p>
+
+        <form id="user-form" class="form">
+          <div class="field">
+            <label for="name">Nome</label>
+            <input id="name" name="name" placeholder="Ex: Felipe Roberto" autocomplete="name" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" placeholder="ex: felipe@email.com" type="email" autocomplete="email" required />
+          </div>
+
+          <div class="field">
+            <label for="age">Idade</label>
+            <input id="age" name="age" placeholder="Ex: 24" type="number" min="0" step="1" required />
+          </div>
+
+          <!-- ✅ Input de SENHA no cadastro -->
+          <div class="field">
+            <label for="password">Senha</label>
+            <input
+              id="password"
+              name="password"
+              placeholder="Mínimo 6 caracteres"
+              type="password"
+              required
+              minlength="6"
+              autocomplete="new-password"
+            />
+          </div>
+
+          <button class="btn" type="submit" id="submitBtn">
+            Cadastrar
+          </button>
+        </form>
+
+        <!-- Alert bonito -->
+        <div id="alert" class="alert hidden" role="status" aria-live="polite">
+          <div class="alert-icon" id="alertIcon">✓</div>
+          <div class="alert-content">
+            <div class="alert-title" id="alertTitle">Sucesso</div>
+            <div class="alert-message" id="alertMessage">Usuário cadastrado.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Card da lista -->
+      <section class="card">
+        <div class="row">
+          <div>
+            <h2>Usuários</h2>
+            <p class="muted">Lista carregada do endpoint <code>/users</code>.</p>
+          </div>
+          <button class="btn secondary" id="refreshBtn" type="button">Atualizar</button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table" aria-label="Tabela de usuários">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Idade</th>
+              </tr>
+            </thead>
+            <tbody id="usersTbody">
+              <tr><td colspan="4" class="muted">Carregando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Projeto de portfólio • Versão 1.0</span>
+      <span class="muted">Local: <code>http://127.0.0.1:8000</code></span>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
